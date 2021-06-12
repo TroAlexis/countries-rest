@@ -1,1 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
 @import "~@/assets/scss/utils/reset.scss";
+
+
+html {
+		--bg-color-primary: #fff;
+		--bg-color-secondary: #fff;
+		--text-color-main: #000;
+}
+
+.dark-mode {
+		--bg-color-primary: #202D36;
+		--bg-color-secondary: #2B3743;
+		--text-color-main: #fff;
+}
+
+body {
+		background: var(--bg-color-primary);
+		color: var(--text-color-main);
+		font-family: 'Open Sans', sans-serif;
+		transition: color $mode-transition-time, background-color $mode-transition-time;
+}
