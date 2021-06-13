@@ -1,22 +1,14 @@
 import { createStore } from 'vuex';
 import domToggleDarkMode from '@/store/plugins/domManipulation';
-import { TOGGLE_DARK_MODE } from '@/store/mutation-types';
+
+import actions from '@/store/actions';
+import mutations from '@/store/mutations';
+import state from '@/store/state';
 
 export default createStore({
   plugins: [domToggleDarkMode],
-  state: {
-    darkMode: false,
-  },
-  mutations: {
-    [TOGGLE_DARK_MODE](state) {
-      state.darkMode = !state.darkMode;
-    },
-  },
-  actions: {
-    toggleDarkMode({ commit }) {
-      commit(TOGGLE_DARK_MODE);
-    },
-  },
-  modules: {
-  },
+  state,
+  mutations,
+  actions,
+  modules: {},
 });
