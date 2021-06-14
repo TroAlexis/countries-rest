@@ -1,11 +1,10 @@
 <template>
-  <div class="header">
+  <header class="header">
     <Wrapper class="header__wrapper">
-      <h1 class="header__logo">Where in the world?</h1>
-
+      <h1 class="header__logo"><router-link to="/">Where in the world?</router-link></h1>
       <ModeToggle/>
     </Wrapper>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -21,21 +20,26 @@ export default {
 <style lang="scss">
 //
 .header {
-  box-shadow: $shadow-lg;
   background: var(--bg-color-secondary);
+  box-shadow: $shadow-lg;
   transition: background-color $mode-transition-time;
 
   &__wrapper {
     @include scut-padding(scut-rem(20) n);
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
 
   &__logo {
-    font-size: scut-rem(24);
     font-weight: 700;
+    font-size: scut-rem(24);
     letter-spacing: 0.02em;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 }
 </style>

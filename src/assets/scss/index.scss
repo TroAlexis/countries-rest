@@ -16,8 +16,8 @@ html {
 }
 
 body {
-		background: var(--bg-color-primary);
 		color: var(--text-color-main);
-		font-family: 'Open Sans', sans-serif;
+		font-family: $font-family;
+		background: var(--bg-color-primary);
 		transition: color $mode-transition-time, background-color $mode-transition-time;
 }

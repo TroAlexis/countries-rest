@@ -15,7 +15,7 @@ export default {
 
 <style lang="scss">
 .button {
-  font-family: inherit;
   display: inline-flex;
+  font-family: inherit;
 }
 </style>

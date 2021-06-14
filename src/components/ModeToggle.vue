@@ -1,7 +1,7 @@
 <template>
   <BaseButton class="mode-toggle" @click.prevent="toggleDarkMode">
     <template #icon>
-      <MoonIcon class="mode-toggle__icon"></MoonIcon>
+      <MoonIcon class="mode-toggle__icon"/>
     </template>
     <template #content>
       <span class="mode-toggle__text">dark mode</span>
@@ -11,7 +11,7 @@
 
 <script>
 import BaseButton from '@/components/Button/BaseButton.vue';
-import { MoonIcon } from '@heroicons/vue/outline';
+import { MoonIcon } from '@heroicons/vue/solid';
 
 import { mapActions, mapState } from 'vuex';
 
@@ -37,21 +37,21 @@ $icon-size: 20;
 $icon-gap: 10;
 
 .mode-toggle {
+  align-items: center;
   color: inherit;
   font-size: scut-rem(16);
-  align-items: center;
-  @include scut-padding(scut-em(5) scut-em(5));
-  border: 0;
   background: none;
+  border: 0;
   cursor: pointer;
+  @include scut-padding(scut-em(5) scut-em(5));
   &__icon {
     width: scut-em($icon-size);
     height: scut-em($icon-size);
     margin-right: scut-em($icon-gap);
 
     path {
-      stroke-width: 2;
       transition: stroke-width 0.5s;
+      stroke-width: 2;
     }
 
     &:hover {
@@ -62,10 +62,11 @@ $icon-gap: 10;
   }
 
   &__text {
-    letter-spacing: 0.03em;
-    text-transform: capitalize;
     font-weight: 600;
     font-size: scut-em(16);
+    letter-spacing: 0.03em;
+    text-transform: capitalize;
   }
 }
+
 </style>
