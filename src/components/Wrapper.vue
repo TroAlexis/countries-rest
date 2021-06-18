@@ -13,6 +13,6 @@ export default {
 <style lang="scss">
 .wrapper {
   @include scut-center-block(scut-rem(1232px));
-  @include scut-padding(scut-rem(16) n)
+  @include scut-padding(n scut-rem(16))
 }
 </style>

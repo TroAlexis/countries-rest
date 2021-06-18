@@ -42,8 +42,11 @@ $icon-gap: 10;
   font-size: scut-rem(16);
   background: none;
   border: 0;
+
   cursor: pointer;
   @include scut-padding(scut-em(5) scut-em(5));
+  @include transition-clicked;
+
   &__icon {
     width: scut-em($icon-size);
     height: scut-em($icon-size);

@@ -22,8 +22,10 @@ export default {
 @import 'BaseInputBox';
 
 .input-box-base {
+  color: inherit;
+  font: inherit;
   background-color: var(--bg-color-secondary);
-  border: 1px solid rgba(35, 35, 35, 0.085);
+  border: $input-border;
   border-radius: #{$input-radius}px;
   box-shadow: $shadow-lg;
   transition: background-color $mode-transition-time,

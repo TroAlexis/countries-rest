@@ -3,8 +3,9 @@
     <Wrapper class="home__wrapper">
       <form @submit.prevent="" class="controls">
         <SearchBar class="controls__search"/>
-        <FilterSelect/>
+        <RegionSelect/>
       </form>
+      <CountriesList/>
     </Wrapper>
   </main>
 </template>
@@ -12,12 +13,16 @@
 <script>
 import Wrapper from '@/components/Wrapper.vue';
 import SearchBar from '@/components/SearchBar.vue';
-import FilterSelect from '@/components/FilterSelect.vue';
+import RegionSelect from '@/components/RegionSelect.vue';
+import CountriesList from '@/components/CountriesList.vue';
 
 export default {
   name: 'Home',
   components: {
-    FilterSelect, SearchBar, Wrapper,
+    CountriesList,
+    RegionSelect,
+    SearchBar,
+    Wrapper,
   },
 };
 </script>

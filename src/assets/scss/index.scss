@@ -6,12 +6,14 @@
 html {
 		--bg-color-primary: #fff;
 		--bg-color-secondary: #fff;
+		--bg-color-accent: #f7f7f7;
 		--text-color-main: #000;
 }
 
 .dark-mode {
 		--bg-color-primary: #202D36;
 		--bg-color-secondary: #2B3743;
+		--bg-color-accent: #24313b;
 		--text-color-main: #fff;
 }
 
@@ -20,4 +22,8 @@ body {
 		font-family: $font-family;
 		background: var(--bg-color-primary);
 		transition: color $mode-transition-time, background-color $mode-transition-time;
+}
+
+img {
+		max-width: 100%;
 }

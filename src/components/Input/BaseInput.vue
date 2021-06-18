@@ -60,6 +60,9 @@ $visuals-opacity: 0.55;
     #{$root}__icon {
       transform: translateX(-175%) translateY(-50%);
       opacity: $visuals-opacity - 0.2;
+      @at-root .dark-mode & {
+        opacity: 1;
+      }
     }
   }
 }
@@ -77,10 +80,9 @@ $visuals-opacity: 0.55;
   position: relative;
   display: inline-flex;
   &__input {
-
     flex: 1;
-    font-size: inherit;
-    font-family: $font-family;
+    //font-size: inherit;
+    //font-family: $font-family;
     @include scut-padding(scut-em(20) scut-em(40) scut-em(20) scut-em(10));
 
     &::placeholder {
@@ -109,6 +111,9 @@ $visuals-opacity: 0.55;
     left: scut-em($left-p);
     transform: translateY(-50%);
     opacity: $visuals-opacity;
+    @at-root .dark-mode & {
+      opacity: 1;
+    }
     transition: transform $focus-transition-time $placeholder-transiton-delay,
     opacity $focus-transition-time $placeholder-transiton-delay;
     pointer-events: none;
@@ -134,6 +139,9 @@ $visuals-opacity: 0.55;
     height: scut-em($icon-size);
     transform: translateY(-50%);
     opacity: $visuals-opacity;
+    @at-root .dark-mode & {
+      opacity: 1;
+    }
     transition:
       transform $focus-transition-time*1.25 $search-transition-delay + $focus-transition-time/5,
       opacity $focus-transition-time $search-transition-delay;

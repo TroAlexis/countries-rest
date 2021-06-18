@@ -1,0 +1,26 @@
+@mixin transition-clicked($transitions: false) {
+		transform: scale(1);
+		@if ($transitions) {
+				transition: transform 0.2s ease, $transitions;
+		} @else {
+				transition: transform 0.2s ease;
+		}
+		
+		&:active {
+				transform: scale(0.98);
+		}
+}
+
+@mixin transition-bg($transitions: false) {
+		@if ($transitions) {
+				transition: background-color $mode-transition-time, $transitions;
+		} @else {
+				transition: background-color $mode-transition-time;
+		}
+}
+
+@mixin truncate() {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+}
