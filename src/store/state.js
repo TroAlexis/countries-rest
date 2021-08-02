@@ -1,4 +1,4 @@
 export default {
   darkMode: false,
-  regions: ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'],
+  regions: ['All', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania'],
 };

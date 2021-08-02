@@ -13,6 +13,11 @@ export default {
     state.loading = data;
   },
   [SET_FILTER](state, { data }) {
-    state.filter = { ...data };
+    const filterExists = state.filters[data.key];
+    if (!filterExists) {
+      state.filters = { ...state.filters, [data.key]: { value: data.value, func: data.func } };
+    } else {
+      state.filters[data.key] = { ...state.filters[data.key], value: data.value };
+    }
   },
 };

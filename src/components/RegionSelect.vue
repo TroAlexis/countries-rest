@@ -4,7 +4,7 @@
     :options="regions"
     v-model:selected="filter"
   >
-    <template #placeholder>{{selected || `Filter by ${by}`}}</template>
+    <template #placeholder>{{filter || `Filter by ${by}`}}</template>
   </BaseSelect>
 </template>
 
@@ -25,21 +25,28 @@ export default {
   },
   computed: {
     ...mapState(['regions']),
-    ...mapState('countries', { filterFromState: 'filter' }),
+    ...mapState('countries', { filtersFromState: 'filters' }),
     filter: {
       get() {
-        return this.filter;
+        return this.filtersFromState[this.by].value;
       },
       set(value) {
         this.updateFilter({
-          prop: this.by,
-          val: value,
+          key: this.by,
+          value: value === 'All' ? '' : value,
         });
       },
     },
   },
   methods: {
     ...mapActions('countries', ['updateFilter']),
+  },
+  created() {
+    this.updateFilter({
+      key: this.by,
+      value: '',
+      func: (country, value) => country[this.by] === value,
+    });
   },
 };
 </script>

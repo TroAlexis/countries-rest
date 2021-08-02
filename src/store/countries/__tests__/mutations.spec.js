@@ -24,18 +24,17 @@ describe('countries/mutations', () => {
 
   it(`${SET_FILTER} sets filter data`, () => {
     const state = {
-      filter: {
-        prop: null,
-        val: null,
-      },
+      filters: {},
     };
+    const filterFunc = expect.any(Function);
     const filter = {
-      prop: 'region',
-      val: 'Africa',
+      key: 'region',
+      value: 'Africa',
+      func: filterFunc,
     };
 
     mutations[SET_FILTER](state, { data: filter });
 
-    expect(state.filter).toEqual(filter);
+    expect(state.filters).toMatchObject({ region: { value: 'Africa', func: filterFunc } });
   });
 });

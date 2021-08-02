@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
-@import "~@/assets/scss/utils/reset.scss";
+@import "~@/assets/scss/utils/reset";
+@import "~@/assets/scss/utils/transitions";
 
+html, body {
+		height: 100%;
+}
 
 html {
 		--bg-color-primary: #fff;
 		--bg-color-secondary: #fff;
 		--bg-color-accent: #f7f7f7;
+		--bg-color-accent-sharp: #fdffbd;
 		--text-color-main: #000;
 }
 
@@ -14,6 +19,7 @@ html {
 		--bg-color-primary: #202D36;
 		--bg-color-secondary: #2B3743;
 		--bg-color-accent: #24313b;
+		--bg-color-accent-sharp: #151512;
 		--text-color-main: #fff;
 }
 
@@ -26,4 +32,10 @@ body {
 
 img {
 		max-width: 100%;
+}
+
+#app {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
 }

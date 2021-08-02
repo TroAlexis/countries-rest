@@ -31,7 +31,16 @@ export default {
 @import "~@/assets/scss/index.scss";
 
 .home {
-//
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  &__wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 .controls {

@@ -9,9 +9,11 @@ describe('countries/getters', () => {
         { name: 'Italy', region: 'Europe' },
         { name: 'Argentina', region: 'Americas' },
       ],
-      filter: {
-        prop: 'region',
-        val: 'Americas',
+      filters: {
+        region: {
+          value: 'Americas',
+          func: ({ region }, value) => region === value,
+        },
       },
     };
 

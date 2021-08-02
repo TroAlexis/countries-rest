@@ -1,6 +1,6 @@
 <template>
   <BaseInput class="search-bar"
-    v-model:input="searchedCountry"
+    v-model:input.lazy="filter"
   >
     <template #placeholder>Search for a country...</template>
   </BaseInput>
@@ -8,14 +8,42 @@
 
 <script>
 import BaseInput from '@/components/Input/BaseInput.vue';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'SearchBar.vue',
+  props: {
+    by: {
+      type: String,
+      default() {
+        return 'name';
+      },
+    },
+  },
   components: { BaseInput },
-  data() {
-    return {
-      searchedCountry: '',
-    };
+  computed: {
+    ...mapState('countries', { filtersFromState: 'filters' }),
+    filter: {
+      get() {
+        return this.filtersFromState[this.by].value;
+      },
+      set(value) {
+        this.updateFilter({
+          key: this.by,
+          value,
+        });
+      },
+    },
+  },
+  methods: {
+    ...mapActions('countries', ['updateFilter']),
+  },
+  created() {
+    this.updateFilter({
+      key: this.by,
+      value: '',
+      func: (country, value) => country[this.by].toLowerCase().includes(value.toLowerCase()),
+    });
   },
 };
 </script>

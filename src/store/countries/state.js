@@ -1,11 +1,8 @@
 /** @var { CountriesState } */
 const STATE = {
-  data: null,
+  data: [],
   loading: true,
-  filter: {
-    prop: null,
-    val: null,
-  },
+  filters: {},
 };
 
 export default STATE;

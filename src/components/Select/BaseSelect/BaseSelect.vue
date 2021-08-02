@@ -7,7 +7,7 @@
       @keyup.enter="toggle"
       v-click-outside="hide"
     >
-      <span class="select-base__placeholder">
+      <span :class="['select-base__placeholder', selected && 'select-base__placeholder--selected']">
         <slot name="placeholder">
           Select from options
         </slot>
@@ -107,6 +107,11 @@ export default {
     flex: 1;
     min-width: 0;
     line-height: 1.5;
+    opacity: 0.55;
+
+    &--selected {
+      opacity: 1;
+    }
     @include scut-margin(n scut-em($p-x * 2) n n);
 
     @include truncate;
