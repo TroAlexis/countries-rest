@@ -2,6 +2,8 @@ const path = require('path');
 
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
   pluginOptions: {
     'style-resources-loader': {
@@ -18,4 +20,5 @@ module.exports = {
       }),
     ],
   },
+  publicPath: isProduction ? '/countries-rest/' : '/',
 };
