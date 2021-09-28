@@ -19,7 +19,7 @@ export default {
   props: {
     flag: String,
     name: String,
-    population: Number,
+    area: Number,
     region: String,
     capital: String,
   },
@@ -27,8 +27,8 @@ export default {
     details() {
       return [
         {
-          name: 'Population',
-          data: numberWithCommas(this.population),
+          name: 'Area',
+          data: `${numberWithCommas(this.area)} km²`,
         }, {
           name: 'Region',
           data: this.region,

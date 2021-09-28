@@ -3,9 +3,9 @@
     <Wrapper class="home__wrapper">
       <form @submit.prevent="" class="controls">
         <SearchBar class="controls__search"/>
-        <RegionSelect/>
+        <RegionSelect />
       </form>
-      <CountriesList/>
+      <CountriesList />
     </Wrapper>
   </main>
 </template>

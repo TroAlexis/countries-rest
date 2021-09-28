@@ -9,6 +9,7 @@
 <script>
 import BaseInput from '@/components/Input/BaseInput.vue';
 import { mapActions, mapState } from 'vuex';
+import get from 'lodash.get';
 
 export default {
   name: 'SearchBar.vue',
@@ -16,7 +17,7 @@ export default {
     by: {
       type: String,
       default() {
-        return 'name';
+        return 'name.common';
       },
     },
   },
@@ -42,7 +43,9 @@ export default {
     this.updateFilter({
       key: this.by,
       value: '',
-      func: (country, value) => country[this.by].toLowerCase().includes(value.toLowerCase()),
+      func: (country, value) => get(country, this.by)
+        .toLowerCase()
+        .includes(value.toLowerCase()),
     });
   },
 };

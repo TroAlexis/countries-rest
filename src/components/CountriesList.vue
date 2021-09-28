@@ -3,25 +3,26 @@
   <div class="countries-list" v-else>
     <transition-group
       tag="ul"
-      ref="list"
       appear name="tile"
+      ref="countries"
       class="countries-list__wrapper"
     >
       <CountryCard
         class="countries-list__card"
-        v-for="(country, index) in countriesLimited"
-        :key="country.name"
-        :flag="country.flag"
-        :population="country.population"
-        :capital="country.capital"
-        :region="country.region"
+        v-for="({name, flags, area, capital = [], region}, index) in countriesLimited"
+        :key="name.common"
+        :flag="flags[0]"
+        :area="area"
+        :capital="capital[0]"
+        :region="region"
         :style="{transitionDelay: `${index * 15}ms`}"
-        :name="country.name"
+        :name="name.common"
       />
     </transition-group>
     <Pagination
       :pages="getPages"
-      v-model:current-page="currentPage"
+      :current-page="currentPage"
+      @update:current-page="handlePageUpdate"
       class="countries-list__pagination"
     />
   </div>
@@ -62,6 +63,9 @@ export default {
   },
   methods: {
     ...mapActions('countries', ['fetchCountries']),
+    handlePageUpdate(page) {
+      this.currentPage = page;
+    },
   },
   created() {
     this.fetchCountries();
