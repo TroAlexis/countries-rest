@@ -3,21 +3,25 @@
   <div class="countries-list" v-else>
     <transition-group
       tag="ul"
-      appear name="tile"
+      name="tile"
       ref="countries"
       class="countries-list__wrapper"
     >
-      <CountryCard
-        class="countries-list__card"
-        v-for="({name, flags, area, capital = [], region}, index) in countriesLimited"
-        :key="name.common"
-        :flag="flags[0]"
-        :area="area"
-        :capital="capital[0]"
-        :region="region"
-        :style="{transitionDelay: `${index * 15}ms`}"
-        :name="name.common"
-      />
+      <li class="countries-list__card"
+                   v-for="({name, flags, area, capital = [], region}, index) in countriesLimited"
+                   :key="name.common"
+      >
+        <router-link :to="name.common.toLowerCase()" class="countries-list__card-link">
+          <CountryCard
+            :flag="flags[0]"
+            :area="area"
+            :capital="capital[0]"
+            :region="region"
+            :style="{transitionDelay: `${index * 15}ms`}"
+            :name="name.common"
+          />
+        </router-link>
+      </li>
     </transition-group>
     <Pagination
       :pages="getPages"
@@ -60,6 +64,9 @@ export default {
     getPages() {
       return Math.ceil(this.filteredCountries.length / this.showMax);
     },
+    hasCountriesStored() {
+      return this.filteredCountries.length;
+    },
   },
   methods: {
     ...mapActions('countries', ['fetchCountries']),
@@ -68,7 +75,9 @@ export default {
     },
   },
   created() {
-    this.fetchCountries();
+    if (!this.hasCountriesStored) {
+      this.fetchCountries();
+    }
   },
 };
 </script>
@@ -91,6 +100,18 @@ $card-gap: 20;
   &__card {
     flex-basis: scut-em(250);
     margin: scut-em($card-gap);
+    transform: translateY(0);
+    transition: transform .3s;
+
+    &:hover {
+      transform: translateY(-.15rem);
+    }
+  }
+
+  &__card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
   }
 
   &__pagination {
