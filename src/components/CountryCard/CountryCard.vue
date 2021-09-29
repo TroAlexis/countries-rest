@@ -57,6 +57,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center top;
     background-size: 100% 100%;
+    box-shadow: $shadow-inner;
   }
 
   &__title,
