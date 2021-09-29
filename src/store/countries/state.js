@@ -1,4 +1,3 @@
-/** @var { CountriesState } */
 const STATE = {
   data: [],
   loading: true,

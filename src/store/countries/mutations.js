@@ -1,11 +1,6 @@
 import { SET_COUNTRIES, SET_FILTER, SET_LOADING } from './mutation-types';
 
 export default {
-  /**
-    *
-    * @param { Object } state
-    * @param { string } data
-    */
   [SET_COUNTRIES](state, { data }) {
     state.data = data;
   },
