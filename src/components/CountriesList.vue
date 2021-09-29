@@ -89,7 +89,7 @@ $card-gap: 20;
 
 .countries-list {
   @include scut-margin(n scut-em(-16));
-  padding: scut-em(50) scut-em(16);
+  padding: scut-em($content-py) scut-em(16);
   overflow: hidden;
   &__wrapper {
     display: flex;

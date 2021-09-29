@@ -72,5 +72,9 @@ export default {
       @include scut-size(scut-em(16));
       margin-right: scut-em(8);
     }
+
+    &__content {
+      padding-top: scut-rem($content-py);
+    }
   }
 </style>
