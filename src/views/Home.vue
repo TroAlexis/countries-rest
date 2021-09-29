@@ -46,7 +46,7 @@ export default {
 .controls {
   display: flex;
   justify-content: space-between;
-  padding-top: scut-rem(50);
+  padding-top: scut-rem($controls-py);
 
   &__search {
     flex-basis: scut-em(400);
