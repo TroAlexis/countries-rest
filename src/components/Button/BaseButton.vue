@@ -1,5 +1,5 @@
 <template>
-<button type="button" class="button">
+<button type="button" class="button-base">
   <slot name="icon"></slot>
   <slot name="content">
     Click me!
@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style lang="scss">
-.button {
+.button-base {
   display: inline-flex;
   font-family: inherit;
 }
