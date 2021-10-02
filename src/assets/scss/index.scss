@@ -2,6 +2,7 @@
 
 @import "~@/assets/scss/utils/reset";
 @import "~@/assets/scss/utils/transitions";
+@import "~@/assets/scss/utils/text.scss";
 
 html, body {
 		height: 100%;
@@ -13,6 +14,7 @@ html {
 		--bg-color-accent: #f7f7f7;
 		--bg-color-accent-sharp: #fdffbd;
 		--text-color-main: #000;
+		--text-color-secondary: #4c4c4c;
 }
 
 .dark-mode {
@@ -21,6 +23,7 @@ html {
 		--bg-color-accent: #24313b;
 		--bg-color-accent-sharp: #151512;
 		--text-color-main: #fff;
+		--text-color-secondary: #f1f1f1;
 }
 
 body {
@@ -38,4 +41,8 @@ img {
 		display: flex;
 		flex-direction: column;
 		height: 100%;
+}
+
+a {
+	text-decoration: none;
 }
