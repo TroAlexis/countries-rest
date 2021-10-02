@@ -26,7 +26,7 @@ describe('ModeToggle.vue', () => {
       },
 
     });
-    const button = wrapper.find('.button');
+    const button = wrapper.find('.button-base');
 
     await button.trigger('click');
 
