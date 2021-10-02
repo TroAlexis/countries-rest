@@ -3,7 +3,7 @@
     <Wrapper class="home__wrapper">
       <Spinner v-if="loading"/>
       <CountryDetail v-else
-        :country="country"
+        v-bind="country"
       />
     </Wrapper>
   </main>
@@ -14,6 +14,21 @@ import Wrapper from '@/components/Wrapper.vue';
 import Spinner from '@/components/Spinner.vue';
 import CountryDetail from '@/components/CountryDetail/CountryDetail.vue';
 import { mapState } from 'vuex';
+
+const countrySchema = [
+  { key: 'name', getter: getCountryName },
+  { key: 'nativeName', getter: getCountryNativeName },
+  { key: 'flag', getter: getCountryFlag },
+  { key: 'area' },
+  { key: 'population' },
+  { key: 'region' },
+  { key: 'subregion' },
+  { key: 'capital', getter: getCountryCapital },
+  { key: 'tld', getter: getCountryTopLevelDomain },
+  { key: 'currencies', getter: getCountryCurrencies },
+  { key: 'languages', getter: getCountryLanguages },
+  { key: 'mapLink', getter: getMapLink },
+];
 
 export default {
   name: 'Country',
@@ -30,7 +45,8 @@ export default {
   },
   async created() {
     try {
-      this.country = await this.getCountry();
+      const country = await this.getCountry();
+      this.country = this.getFormattedCountry(country);
       this.loading = false;
     } catch (e) {
       this.loading = true;
@@ -61,8 +77,54 @@ export default {
       const [countryFromApi] = await this.getCountryFromApi(this.countryName);
       return countryFromApi;
     },
+    getFormattedCountry(country) {
+      return countrySchema.reduce((obj, property) => {
+        // eslint-disable-next-line no-param-reassign
+        obj[property.key] = property.getter
+          ? property.getter(country)
+          : country[property.key];
+
+        return obj;
+      }, {});
+    },
   },
 };
+
+function getCountryName(country) {
+  return country.name?.common;
+}
+
+function getCountryNativeName(country) {
+  const nativeNames = country.name?.nativeName;
+  if (!nativeNames) {
+    return 'No native name';
+  }
+  const [nativeName] = Object.values(nativeNames);
+  return nativeName?.official || nativeName?.common;
+}
+function getCountryFlag(country) {
+  const [flag] = country.flags;
+  return flag;
+}
+function getCountryCapital(country) {
+  const [capital] = country.capital;
+  return capital;
+}
+function getCountryTopLevelDomain(country) {
+  const [tld] = country.tld;
+  return tld;
+}
+function getCountryCurrencies(country) {
+  return Object.values(country.currencies);
+}
+function getCountryLanguages(country) {
+  return Object.values(country.currencies);
+}
+function getMapLink(country) {
+  const { maps = {} } = country;
+  const [mapLink] = Object.values(maps);
+  return mapLink;
+}
 </script>
 
 <style lang="scss">

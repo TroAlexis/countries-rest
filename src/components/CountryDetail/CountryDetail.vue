@@ -13,32 +13,84 @@
     <section class="country-detail__content">
       <img
         :src="flag"
-        :alt="`${country.name.common} flag`"
+        :alt="`${name} flag`"
+        class="country-detail__flag"
       >
+      <div class="country-detail__info">
+        <h2 class="country-detail__heading h4-like">{{ name }}</h2>
+        <div class="country-detail__features-wrap">
+          <ul class="country-detail__features">
+            <li
+              v-for="feature in $options.$static.features"
+              :key="feature.key"
+              class="country-detail__feature"
+            >
+              <span class="fw-600">{{ feature.label }}: </span>
+              <span>{{ getFeatureText(feature.key) }}</span>
+            </li>
+          </ul>
+        </div>
+        <Button tag="a" target="blank" :href="mapLink" class="country-detail__map-button">
+          <template #content>
+            <span class="fw-600">View on map</span>
+          </template>
+          <template #icon>
+            <LocationMarkerIcon />
+          </template>
+        </Button>
+      </div>
     </section>
   </article>
 </template>
 
 <script>
-import { ArrowLeftIcon } from '@heroicons/vue/solid';
+import { ArrowLeftIcon, LocationMarkerIcon } from '@heroicons/vue/solid';
 import Button from '@/components/Button/Button.vue';
 
 export default {
   name: 'CountryDetail',
-  components: { Button, ArrowLeftIcon },
+  components: { Button, ArrowLeftIcon, LocationMarkerIcon },
   props: {
-    country: {
-      type: Object,
-      default: () => ({}),
-      validator: (country) => ['name', 'flags'].every(
-        (property) => Object.keys(country).includes(property),
-      ),
+    name: String,
+    nativeName: String,
+    flag: String,
+    area: Number,
+    population: Number,
+    region: String,
+    subregion: String,
+    capital: String,
+    tld: String,
+    currencies: {
+      type: Array,
+      default: () => [],
     },
+    languages: {
+      type: Array,
+      default: () => [],
+    },
+    mapLink: String,
   },
   emits: ['back'],
-  computed: {
-    flag() {
-      return this.country?.flags?.[0];
+  $static: {
+    features: [
+      { label: 'Native Name', key: 'nativeName' },
+      { label: 'Area', key: 'area' },
+      { label: 'Population', key: 'population' },
+      { label: 'Region', key: 'region' },
+      { label: 'Sub Region', key: 'subregion' },
+      { label: 'Capital', key: 'capital' },
+      { label: 'Top Level Domain', key: 'tld' },
+      { label: 'Currencies', key: 'currencies' },
+      { label: 'Languages', key: 'languages' },
+    ],
+  },
+  methods: {
+    getFeatureText(featureKey) {
+      const feature = this[featureKey];
+      if (!Array.isArray(feature)) {
+        return feature;
+      }
+      return feature.map((item) => item.name).join(', ');
     },
   },
 };
@@ -74,7 +126,59 @@ export default {
     }
 
     &__content {
+      display: flex;
+      justify-content: space-between;
       padding-top: scut-rem($content-py);
+    }
+
+    &__flag {
+      flex-basis: 40%;
+      align-self: flex-start;
+      width: 40%;
+      max-width: scut-rem(450);
+      margin-right: scut-rem(30);
+      box-shadow: $shadow-2xl;
+    }
+
+    &__info {
+      flex-basis: 100%;
+      width: 100%;
+      max-width: scut-rem(600);
+    }
+
+    &__heading {
+      margin-bottom: scut-rem(20);
+    }
+
+    &__features-wrap {
+      padding-bottom: scut-rem(50);
+      overflow: hidden;
+    }
+
+    &__features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: scut-rem(-$features-gap);
+    }
+
+    &__feature {
+      flex-basis: 45%;
+      width: 45%;
+      margin: scut-rem($features-gap);
+      line-height: 1.4;
+      letter-spacing: .01em;
+    }
+
+    &__map-button {
+      font-size: scut-rem(16);
+
+      svg {
+        width: 1.2em;
+        height: 1.2em;
+        margin-right: .5em;
+        color: var(--text-color-secondary);
+      }
     }
   }
 </style>
