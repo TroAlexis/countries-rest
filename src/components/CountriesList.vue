@@ -7,12 +7,13 @@
       ref="countries"
       class="countries-list__wrapper"
     >
-      <li class="countries-list__card"
+      <li class="countries-list__item"
                    v-for="({name, flags, area, capital = [], region}, index) in countriesLimited"
                    :key="name.common"
       >
-        <router-link :to="name.common.toLowerCase()" class="countries-list__card-link">
+        <router-link :to="name.common.toLowerCase()" class="countries-list__item-wrapper">
           <CountryCard
+            class="countries-list__card"
             :flag="flags[0]"
             :area="area"
             :capital="capital[0]"
@@ -97,7 +98,8 @@ $card-gap: 20;
     justify-content: space-around;
     margin: scut-em(-$card-gap);
   }
-  &__card {
+  &__item {
+    display: flex;
     flex-basis: scut-em(250);
     margin: scut-em($card-gap);
     transform: translateY(0);
@@ -108,10 +110,16 @@ $card-gap: 20;
     }
   }
 
-  &__card-link {
-    display: block;
+  &__item-wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     color: inherit;
     text-decoration: none;
+  }
+
+  &__card {
+    flex: 1;
   }
 
   &__pagination {
