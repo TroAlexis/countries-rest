@@ -23,7 +23,7 @@ export default {
   justify-content: center;
   padding: scut-em(8) scut-em(16);
   color: inherit;
-  background-color: var(--bg-color-primary);
+  background-color: var(--bg-color-secondary);
   border: 0;
   border-radius: 6px;
   box-shadow: $shadow-lg;

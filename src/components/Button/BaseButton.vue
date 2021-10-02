@@ -1,15 +1,21 @@
 <template>
-<button type="button" class="button-base">
+<component :is="tag" type="button" class="button-base">
   <slot name="icon"></slot>
   <slot name="content">
     Click me!
   </slot>
-</button>
+</component>
 </template>
 
 <script>
 export default {
   name: 'BaseButton',
+  props: {
+    tag: {
+      type: String,
+      default: 'button',
+    },
+  },
 };
 </script>
 
