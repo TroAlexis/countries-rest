@@ -3,6 +3,7 @@
     <BaseInputBox
       tag="input"
       type="text"
+      :value="input"
       @input="$emit('update:input', $event.target.value)"
       class="input-base__input"
       placeholder="Search"
@@ -31,6 +32,9 @@ export default {
     SearchIcon,
   },
   props: {
+    inputModifiers: {
+      default: () => ({}),
+    },
     input: {
       type: String,
       default() {

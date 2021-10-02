@@ -1,6 +1,6 @@
 <template>
   <BaseInput class="search-bar"
-    v-model:input.lazy="filter"
+    v-model:input="filter"
   >
     <template #placeholder>Search for a country...</template>
   </BaseInput>
