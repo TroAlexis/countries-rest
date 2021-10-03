@@ -27,7 +27,7 @@
     <Pagination
       :pages="getPages"
       :current-page="currentPage"
-      @update:current-page="handlePageUpdate"
+      @update:current-page="$emit('update:currentPage', $event)"
       class="countries-list__pagination"
     />
   </div>
@@ -42,16 +42,16 @@ import Pagination from '@/components/Pagination/Pagination.vue';
 export default {
   name: 'CountriesList',
   components: { Pagination, Spinner, CountryCard },
+  props: {
+    currentPage: {
+      type: Number,
+      default: 1,
+    },
+  },
   data() {
     return {
       showMax: 12,
-      currentPage: 1,
     };
-  },
-  watch: {
-    getPages() {
-      this.currentPage = 1;
-    },
   },
   computed: {
     ...mapState('countries', { loading: 'loading' }),
@@ -71,9 +71,6 @@ export default {
   },
   methods: {
     ...mapActions('countries', ['fetchCountries']),
-    handlePageUpdate(page) {
-      this.currentPage = page;
-    },
   },
   created() {
     if (!this.hasCountriesStored) {

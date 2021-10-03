@@ -35,6 +35,7 @@ export default {
           key: this.by,
           value: value === 'All' ? '' : value,
         });
+        this.$emit('select');
       },
     },
   },

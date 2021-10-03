@@ -3,9 +3,9 @@
     <Wrapper class="home__wrapper">
       <form @submit.prevent="" class="controls">
         <SearchBar class="controls__search"/>
-        <RegionSelect />
+        <RegionSelect @select="onSelect" />
       </form>
-      <CountriesList />
+      <CountriesList v-model:current-page="currentPage" />
     </Wrapper>
   </main>
 </template>
@@ -23,6 +23,19 @@ export default {
     RegionSelect,
     SearchBar,
     Wrapper,
+  },
+  data() {
+    return {
+      currentPage: 1,
+    };
+  },
+  methods: {
+    onSelect() {
+      this.resetCurrentPage();
+    },
+    resetCurrentPage() {
+      this.currentPage = 1;
+    },
   },
 };
 </script>
