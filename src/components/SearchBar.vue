@@ -26,7 +26,7 @@ export default {
     ...mapState('countries', { filtersFromState: 'filters' }),
     filter: {
       get() {
-        return this.filtersFromState[this.by].value;
+        return this.filtersFromState[this.by]?.value;
       },
       set(value) {
         this.updateFilter({
@@ -34,6 +34,11 @@ export default {
           value,
         });
       },
+    },
+  },
+  watch: {
+    filter() {
+      this.$emit('input');
     },
   },
   methods: {

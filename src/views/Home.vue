@@ -2,7 +2,7 @@
   <main class="home">
     <Wrapper class="home__wrapper">
       <form @submit.prevent="" class="controls">
-        <SearchBar class="controls__search"/>
+        <SearchBar class="controls__search" @input="onInput"/>
         <RegionSelect @select="onSelect" />
       </form>
       <CountriesList v-model:current-page="currentPage" />
@@ -31,6 +31,9 @@ export default {
   },
   methods: {
     onSelect() {
+      this.resetCurrentPage();
+    },
+    onInput() {
       this.resetCurrentPage();
     },
     resetCurrentPage() {
