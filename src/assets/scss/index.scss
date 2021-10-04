@@ -15,6 +15,11 @@ html {
 		--bg-color-accent-sharp: #fdffbd;
 		--text-color-main: #000;
 		--text-color-secondary: #4c4c4c;
+
+		font-size: 1rem;
+		@include media('<=tablet') {
+			font-size: .85rem;
+		}
 }
 
 .dark-mode {
