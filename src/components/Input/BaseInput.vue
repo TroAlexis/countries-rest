@@ -8,15 +8,17 @@
       class="input-base__input"
       placeholder="Search"
     />
-    <span class="input-base__placeholder">
-      <slot name="placeholder">
-        Search
-      </slot>
-    </span>
-    <span class="input-base__icon-wrapper">
-      <slot name="icon">
-        <SearchIcon class="input-base__icon"/>
-      </slot>
+    <span class="input-base__visuals">
+      <span class="input-base__placeholder">
+        <slot name="placeholder">
+          Search
+        </slot>
+      </span>
+      <span class="input-base__icon-wrapper">
+        <slot name="icon">
+          <SearchIcon class="input-base__icon" />
+        </slot>
+      </span>
     </span>
   </label>
 </template>
@@ -58,7 +60,7 @@ $icon-color: #797979;
 $visuals-opacity: 0.55;
 
 @mixin search-transition($root) {
-  ~#{$root}__icon-wrapper {
+  ~#{$root}__visuals #{$root}__icon-wrapper {
     transform: translateX(100%);
 
     #{$root}__icon {
@@ -72,7 +74,7 @@ $visuals-opacity: 0.55;
 }
 
 @mixin placeholder-transition($root) {
-  ~#{$root}__placeholder {
+  ~#{$root}__visuals #{$root}__placeholder {
         transform: translateX(100%) translateY(-50%);
         opacity: 0;
         transition-delay: 0s, 0s;
@@ -83,11 +85,15 @@ $visuals-opacity: 0.55;
   $root: &;
   position: relative;
   display: inline-flex;
+  line-height: 1.5;
   &__input {
     flex: 1;
     //font-size: inherit;
     //font-family: $font-family;
     @include scut-padding(scut-em(20) scut-em(40) scut-em(20) scut-em(10));
+    @include media("<=tablet") {
+      @include scut-padding(scut-em(10) scut-em(20));
+    }
 
     &::placeholder {
       opacity: 0;
@@ -107,6 +113,17 @@ $visuals-opacity: 0.55;
       @include placeholder-transition($root);
     }
 
+  }
+
+  &__visuals {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
   &__placeholder {

@@ -3,7 +3,7 @@
     <Wrapper class="home__wrapper">
       <form @submit.prevent="" class="controls">
         <SearchBar class="controls__search" @input="onInput"/>
-        <RegionSelect @select="onSelect" />
+        <RegionSelect @select="onSelect" class="controls__select" />
       </form>
       <CountriesList v-model:current-page="currentPage" />
     </Wrapper>
@@ -63,9 +63,24 @@ export default {
   display: flex;
   justify-content: space-between;
   padding-top: scut-rem($controls-py);
+  @include media('<=tablet') {
+    flex-wrap: wrap;
+  }
 
   &__search {
     flex-basis: scut-em(400);
+    margin-right: scut-rem(20);
+    @include media('<=tablet') {
+      flex-basis: 100%;
+      margin-right: 0;
+      margin-bottom: scut-rem(10);
+    }
+  }
+
+  &__select {
+    @include media('<=tablet') {
+      flex-basis: 100%;
+    }
   }
 }
 

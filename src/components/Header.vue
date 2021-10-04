@@ -40,6 +40,7 @@ $icon-transition-time: 0.3s;
   &__logo {
     $_logo: &;
     position: relative;
+    margin-right: scut-rem($icon-size + 30);
     font-weight: 700;
     font-size: scut-rem(24);
 

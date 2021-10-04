@@ -69,6 +69,9 @@ $icon-gap: 10;
     font-size: scut-em(16);
     letter-spacing: 0.03em;
     text-transform: capitalize;
+    @include media('<=tablet') {
+      display: none;
+    }
   }
 }
 
