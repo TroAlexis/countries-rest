@@ -1,5 +1,13 @@
 $page-size: 40;
 
-$page-margin: 7;
+$page-margin: 15;
 
-$p-y: 15;
+$p-y: 20;
+$p-x: 10;
+
+$outer-p-x: 0;
+
+$control-size: 20;
+$control-margin: 10;
+
+$overflowing-padding: $control-size + $control-margin;

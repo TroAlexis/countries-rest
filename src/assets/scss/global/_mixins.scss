@@ -24,3 +24,13 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 }
+
+@mixin remove-scrollbar($direction) {
+		overflow-#{$direction}: scroll;
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none;  /* Internet Explorer 10+ */
+		&::-webkit-scrollbar { /* WebKit */
+			width: 0;
+			height: 0;
+		}
+}
