@@ -12,3 +12,13 @@
 .tile-leave-active {
     display: none;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
