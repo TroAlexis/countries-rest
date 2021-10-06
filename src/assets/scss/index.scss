@@ -10,6 +10,7 @@ html, body {
 
 html {
 		--bg-color-primary: #fff;
+		--bg-color-primary-rgb: 255, 255, 255;
 		--bg-color-secondary: #fff;
 		--bg-color-accent: #f7f7f7;
 		--bg-color-accent-sharp: #fdffbd;
@@ -24,6 +25,7 @@ html {
 
 .dark-mode {
 		--bg-color-primary: #202D36;
+		--bg-color-primary-rgb: 32, 45, 54;
 		--bg-color-secondary: #2B3743;
 		--bg-color-accent: #24313b;
 		--bg-color-accent-sharp: #151512;

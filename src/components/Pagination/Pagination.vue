@@ -3,7 +3,7 @@
     class="pagination"
     :class="{'pagination--overflowing': isOverflowing}"
   >
-    <div class="pagination__container">
+    <div class="pagination__container" ref="scrollBox">
       <ol
         class="pagination__wrapper"
         ref="wrapper"
@@ -20,10 +20,16 @@
       </ol>
     </div>
     <div class="pagination__controls">
-      <span class="pagination__control pagination__control--left">
+      <span
+        class="pagination__control pagination__control--left"
+        @click="handleScrollClick('left')"
+      >
         <ChevronLeftIcon />
       </span>
-      <span class="pagination__control pagination__control--right">
+      <span
+        class="pagination__control pagination__control--right"
+        @click="handleScrollClick('right')"
+      >
         <ChevronRightIcon />
       </span>
     </div>
@@ -69,6 +75,18 @@ export default {
       window.addEventListener('resize', this.updateOverflowState);
     },
     updateOverflowState: throttle(setOverflowState, 1000),
+    handleScrollClick(direction) {
+      const $scrollBox = this.$refs.scrollBox;
+      const $page = $scrollBox.querySelector('.pagination__page');
+      const pageWidth = $page.scrollWidth * 3.5;
+      const scrollAmount = direction === 'left' ? -pageWidth : pageWidth;
+      const scrollPosition = $scrollBox.scrollLeft;
+      const scrollLeft = scrollAmount + scrollPosition;
+      $scrollBox.scrollTo({
+        behavior: 'smooth',
+        left: scrollLeft,
+      });
+    },
   },
 };
 </script>
@@ -92,7 +110,10 @@ export default {
     display: block;
     width: scut-em($p-x * 2);
     height: 100%;
-    background: linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(
+        90deg, rgba(var(--bg-color-primary-rgb),0.9) 0%,
+               rgba(var(--bg-color-primary-rgb),0) 100%
+    );
     opacity: 0;
     transition: opacity .3s .3s ease-out;
     content: "";
@@ -132,6 +153,10 @@ export default {
     z-index: 0;
     width: 100%;
     height: 100%;
+    visibility: hidden;
+    @at-root #{$overflowing} & {
+      visibility: visible;
+    }
   }
 
   &__control {
