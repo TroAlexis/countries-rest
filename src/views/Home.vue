@@ -63,14 +63,15 @@ export default {
   display: flex;
   justify-content: space-between;
   padding-top: scut-rem($controls-py);
-  @include media('<=tablet') {
+  font-size: 16px;
+  @include media("<=tablet") {
     flex-wrap: wrap;
   }
 
   &__search {
     flex-basis: scut-em(400);
     margin-right: scut-rem(20);
-    @include media('<=tablet') {
+    @include media("<=tablet") {
       flex-basis: 100%;
       margin-right: 0;
       margin-bottom: scut-rem(10);
@@ -78,7 +79,7 @@ export default {
   }
 
   &__select {
-    @include media('<=tablet') {
+    @include media("<=tablet") {
       flex-basis: 100%;
     }
   }

@@ -132,7 +132,10 @@ export default {
     &__content {
       display: flex;
       justify-content: space-between;
-      padding-top: scut-rem($content-py);
+      padding: scut-rem($content-py) 0;
+      @include media('<=tablet') {
+        flex-wrap: wrap;
+      }
     }
 
     &__flag {
@@ -142,16 +145,31 @@ export default {
       max-width: scut-rem(450);
       margin-right: scut-rem(30);
       box-shadow: $shadow-2xl;
+
+      @include media('<=tablet') {
+        flex-basis: 100%;
+        width: 100%;
+        min-height: 200px;
+        margin: 0 auto scut-em(50);
+      }
     }
 
     &__info {
       flex-basis: 100%;
       width: 100%;
       max-width: scut-rem(600);
+
+      @include media('<=tablet') {
+        max-width: none;
+      }
     }
 
     &__heading {
       margin-bottom: scut-rem(20);
+
+      @include media('<=tablet') {
+        text-align: center;
+      }
     }
 
     &__features-wrap {
@@ -172,6 +190,11 @@ export default {
       margin: scut-rem($features-gap);
       line-height: 1.4;
       letter-spacing: .01em;
+
+      @include media('<=tablet') {
+        flex-basis: 100%;
+        width: 100%;
+      }
     }
 
     &__map-button {
