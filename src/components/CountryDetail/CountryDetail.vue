@@ -26,7 +26,7 @@
               class="country-detail__feature"
             >
               <span class="fw-600">{{ feature.label }}: </span>
-              <span>{{ getFeatureText(feature.key) }}</span>
+              <span>{{ getFeatureText(feature) }}</span>
             </li>
           </ul>
         </div>
@@ -80,17 +80,21 @@ export default {
       { label: 'Sub Region', key: 'subregion' },
       { label: 'Capital', key: 'capital' },
       { label: 'Top Level Domain', key: 'tld' },
-      { label: 'Currencies', key: 'currencies' },
+      { label: 'Currencies', key: 'currencies', itemKey: 'name' },
       { label: 'Languages', key: 'languages' },
     ],
   },
   methods: {
-    getFeatureText(featureKey) {
-      const feature = this[featureKey];
-      if (!Array.isArray(feature)) {
-        return feature;
+    getFeatureText(feature) {
+      const { key, itemKey } = feature;
+      const featureProp = this[key];
+      if (!Array.isArray(featureProp)) {
+        return featureProp;
       }
-      return feature.map((item) => item.name).join(', ');
+      if (itemKey) {
+        return featureProp.map((item) => item[itemKey]).join(', ');
+      }
+      return featureProp.join(', ');
     },
   },
 };

@@ -118,7 +118,7 @@ function getCountryCurrencies(country) {
   return Object.values(country.currencies);
 }
 function getCountryLanguages(country) {
-  return Object.values(country.currencies);
+  return Object.values(country.languages);
 }
 function getMapLink(country) {
   const { maps = {} } = country;
