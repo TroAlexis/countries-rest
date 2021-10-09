@@ -117,6 +117,7 @@ export default {
     opacity: 0;
     transition: opacity .3s .3s ease-out;
     content: "";
+    pointer-events: none;
   }
 
   &::before {
