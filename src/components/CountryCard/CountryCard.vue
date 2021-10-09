@@ -5,7 +5,7 @@
       <ul class="country-card__details">
         <li class="country-card__detail" v-for="detail in details" :key="detail">
           <strong>{{ detail.name }}: </strong>
-          {{detail.data}}
+          {{ getDetailText(detail) }}
         </li>
       </ul>
     </article>
@@ -13,6 +13,7 @@
 
 <script>
 import numberWithCommas from '@/helpers/numbers';
+import getTextWithDefault from '@/helpers/text';
 
 export default {
   name: 'CountryCard',
@@ -37,6 +38,12 @@ export default {
           data: this.capital,
         },
       ];
+    },
+  },
+  methods: {
+    getDetailText(detail) {
+      const text = detail.data;
+      return getTextWithDefault(text);
     },
   },
 };

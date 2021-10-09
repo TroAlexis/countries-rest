@@ -26,7 +26,7 @@
               class="country-detail__feature"
             >
               <span class="fw-600">{{ feature.label }}: </span>
-              <span>{{ getFeatureText(feature) }}</span>
+              <span>{{ getNormalizedFeatureText(feature) }}</span>
             </li>
           </ul>
         </div>
@@ -46,6 +46,7 @@
 <script>
 import { ArrowLeftIcon, LocationMarkerIcon } from '@heroicons/vue/solid';
 import Button from '@/components/Button/Button.vue';
+import getTextWithDefault from '@/helpers/text';
 
 export default {
   name: 'CountryDetail',
@@ -74,7 +75,7 @@ export default {
   $static: {
     features: [
       { label: 'Native Name', key: 'nativeName' },
-      { label: 'Area', key: 'area' },
+      { label: 'Area', key: 'area', formatter: (text) => `${text} km²` },
       { label: 'Population', key: 'population' },
       { label: 'Region', key: 'region' },
       { label: 'Sub Region', key: 'subregion' },
@@ -95,6 +96,11 @@ export default {
         return featureProp.map((item) => item[itemKey]).join(', ');
       }
       return featureProp.join(', ');
+    },
+    getNormalizedFeatureText(feature) {
+      const text = this.getFeatureText(feature);
+      const formattedText = feature.formatter ? feature.formatter(text) : text;
+      return getTextWithDefault(formattedText);
     },
   },
 };
@@ -133,7 +139,7 @@ export default {
       display: flex;
       justify-content: space-between;
       padding: scut-rem($content-py) 0;
-      @include media('<=tablet') {
+      @include media("<=tablet") {
         flex-wrap: wrap;
       }
     }
@@ -146,7 +152,7 @@ export default {
       margin-right: scut-rem(30);
       box-shadow: $shadow-2xl;
 
-      @include media('<=tablet') {
+      @include media("<=tablet") {
         flex-basis: 100%;
         width: 100%;
         min-height: 200px;
@@ -159,7 +165,7 @@ export default {
       width: 100%;
       max-width: scut-rem(600);
 
-      @include media('<=tablet') {
+      @include media("<=tablet") {
         max-width: none;
       }
     }
@@ -167,7 +173,7 @@ export default {
     &__heading {
       margin-bottom: scut-rem(20);
 
-      @include media('<=tablet') {
+      @include media("<=tablet") {
         text-align: center;
       }
     }
@@ -191,7 +197,7 @@ export default {
       line-height: 1.4;
       letter-spacing: .01em;
 
-      @include media('<=tablet') {
+      @include media("<=tablet") {
         flex-basis: 100%;
         width: 100%;
       }
