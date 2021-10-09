@@ -36,7 +36,7 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
 import CountryCard from '@/components/CountryCard/CountryCard.vue';
-import Spinner from '@/components/Spinner.vue';
+import Spinner from '@/components/TheSpinner.vue';
 import Pagination from '@/components/Pagination/Pagination.vue';
 
 export default {

@@ -11,7 +11,7 @@
 
 <script>
 import Wrapper from '@/components/Wrapper.vue';
-import Spinner from '@/components/Spinner.vue';
+import Spinner from '@/components/TheSpinner.vue';
 import CountryDetail from '@/components/CountryDetail/CountryDetail.vue';
 import { mapState } from 'vuex';
 
