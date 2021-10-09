@@ -33,7 +33,7 @@
 
 import BaseInputBox from '@/components/Base/BaseInputBox/BaseInputBox.vue';
 import { ChevronDownIcon } from '@heroicons/vue/solid/';
-import BaseSelectOptions from '@/components/Select/BaseSelectOptions.vue';
+import BaseSelectOptions from '@/components/Base/BaseSelect/BaseSelectOptions.vue';
 import ClickOutside from 'vue-click-outside';
 
 export default {
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'BaseSelect';
+@import "BaseSelect";
 .select-base {
   position: relative;
   display: flex;

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import BaseSelect from '@/components/Select/BaseSelect/BaseSelect.vue';
+import BaseSelect from '@/components/Base/BaseSelect/BaseSelect.vue';
 import { mapState, mapActions } from 'vuex';
 
 export default {

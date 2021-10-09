@@ -38,8 +38,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/components/Base/BaseInputBox/BaseInputBox';
-@import 'BaseSelect/BaseSelect';
+@import "~@/components/Base/BaseInputBox/BaseInputBox";
+@import "BaseSelect";
 
 .base-select-options {
   display: flex;

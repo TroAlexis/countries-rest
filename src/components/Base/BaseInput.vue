@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/components/Base/BaseInputBox/BaseInputBox.scss';
+@import "~@/components/Base/BaseInputBox/_BaseInputBox.scss";
 
 $search-transition-delay: 0.05s;
 $placeholder-transiton-delay: $focus-transition-time - 0.2s;

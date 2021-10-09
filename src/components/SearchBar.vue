@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BaseInput from '@/components/Input/BaseInput.vue';
+import BaseInput from '@/components/Base/BaseInput.vue';
 import { mapActions, mapState } from 'vuex';
 import get from 'lodash.get';
 

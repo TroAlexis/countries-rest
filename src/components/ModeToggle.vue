@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import BaseButton from '@/components/Button/BaseButton.vue';
+import BaseButton from '@/components/Base/BaseButton.vue';
 import { MoonIcon } from '@heroicons/vue/solid';
 
 import { mapActions, mapState } from 'vuex';

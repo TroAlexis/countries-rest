@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import BaseButton from '@/components/Button/BaseButton.vue';
+import BaseButton from '@/components/Base/BaseButton.vue';
 
 export default {
   name: 'Button',
