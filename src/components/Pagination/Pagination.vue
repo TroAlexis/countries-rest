@@ -74,6 +74,9 @@ export default {
     setUpOverflowListener() {
       window.addEventListener('resize', this.updateOverflowState);
     },
+    removeOverflowListener() {
+      window.removeEventListener('resize', this.updateOverflowState);
+    },
     updateOverflowState: throttle(setOverflowState, 1000),
     handleScrollClick(direction) {
       const $scrollBox = this.$refs.scrollBox;
@@ -87,6 +90,9 @@ export default {
         left: scrollLeft,
       });
     },
+  },
+  beforeUnmount() {
+    this.removeOverflowListener();
   },
 };
 </script>
