@@ -97,28 +97,30 @@ function getCountryName(country) {
 function getCountryNativeName(country) {
   const nativeNames = country.name?.nativeName;
   if (!nativeNames) {
-    return 'No native name';
+    return null;
   }
-  const [nativeName] = Object.values(nativeNames);
+  const [nativeName] = Object.values(nativeNames) || [];
   return nativeName?.official || nativeName?.common;
 }
 function getCountryFlag(country) {
-  const [flag] = country.flags;
+  const [flag] = country.flags || [];
   return flag;
 }
 function getCountryCapital(country) {
-  const [capital] = country.capital;
+  const [capital] = country.capital || [];
   return capital;
 }
 function getCountryTopLevelDomain(country) {
-  const [tld] = country.tld;
+  const [tld] = country.tld || [];
   return tld;
 }
 function getCountryCurrencies(country) {
-  return Object.values(country.currencies);
+  const { currencies = {} } = country;
+  return Object.values(currencies);
 }
 function getCountryLanguages(country) {
-  return Object.values(country.languages);
+  const { languages = {} } = country;
+  return Object.values(languages);
 }
 function getMapLink(country) {
   const { maps = {} } = country;
