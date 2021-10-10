@@ -10,7 +10,9 @@
 
 <script>
 import BaseSelect from '@/components/Base/BaseSelect/BaseSelect.vue';
-import { mapState, mapActions } from 'vuex';
+import { useStore } from 'vuex';
+import { computed, toRefs, watch } from 'vue';
+import useCountriesFilterValue from '@/composables/useCountriesFilterValue';
 
 export default {
   name: 'RegionSelect',
@@ -23,31 +25,28 @@ export default {
       },
     },
   },
-  computed: {
-    ...mapState(['regions']),
-    ...mapState('countries', { filtersFromState: 'filters' }),
-    filter: {
-      get() {
-        return this.filtersFromState[this.by].value;
-      },
-      set(value) {
-        this.updateFilter({
-          key: this.by,
-          value: value === 'All' ? '' : value,
-        });
-        this.$emit('select');
-      },
-    },
-  },
-  methods: {
-    ...mapActions('countries', ['updateFilter']),
-  },
-  created() {
-    this.updateFilter({
-      key: this.by,
+  setup(props, { emit }) {
+    const { by: filterBy } = toRefs(props);
+    const store = useStore();
+    const regions = computed(() => store.state.regions);
+
+    const filter = {
+      key: filterBy.value,
       value: '',
-      func: (country, value) => country[this.by] === value,
+      func: (country, value) => country[filterBy.value] === value,
+    };
+
+    const { filterValue } = useCountriesFilterValue(filter, filterBy.value);
+    console.log(filterValue);
+
+    watch(filterValue, (value) => {
+      emit('select', value);
     });
+
+    return {
+      filter: filterValue,
+      regions,
+    };
   },
 };
 </script>

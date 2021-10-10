@@ -7,11 +7,11 @@
          'base-select-options__option',
        ]"
       :key="option"
-      @click="$emit('option-selected', option)"
-      @keyup.enter="$emit('option-selected', option)"
+      @click="$emit('option-selected', option.value)"
+      @keyup.enter="$emit('option-selected', option.value)"
       tabindex="0"
   >
-    {{ option }}
+    {{ option.label }}
   </li>
 </ul>
 

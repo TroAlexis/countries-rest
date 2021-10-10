@@ -9,7 +9,6 @@
 <script>
 import BaseInput from '@/components/Base/BaseInput.vue';
 import { toRefs, watch } from 'vue';
-import useCountriesFilters from '@/composables/useCountriesFilters';
 import useCountriesFilterValue from '@/composables/useCountriesFilterValue';
 import get from 'lodash.get';
 
@@ -35,13 +34,11 @@ export default {
         .includes(value.toLowerCase()),
     };
 
-    const { filters } = useCountriesFilters(filter);
-    const { filterValue } = useCountriesFilterValue(filters, filterBy.value);
+    const { filterValue } = useCountriesFilterValue(filter, filterBy.value);
 
     watch(filterValue, () => emit('input'));
 
     return {
-      filters,
       filterValue,
     };
   },
