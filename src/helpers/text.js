@@ -1,5 +1,4 @@
 export function getTextWithDefault(text, defaultText = '-') {
-  console.log('Text: ', text);
   return isTextValid(text) ? text : defaultText;
 }
 
