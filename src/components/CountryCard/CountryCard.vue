@@ -3,17 +3,17 @@
       <div class="country-card__flag" :style="{backgroundImage: `url(${flag})`}"></div>
       <h1 class="country-card__title">{{name}}</h1>
       <ul class="country-card__details">
-        <li class="country-card__detail" v-for="detail in details" :key="detail">
-          <strong>{{ detail.name }}: </strong>
-          {{ getDetailText(detail) }}
+        <li class="country-card__detail" v-for="feature in features" :key="feature.label">
+          <strong>{{ feature.label }}: </strong>
+          {{ feature.text }}
         </li>
       </ul>
     </article>
 </template>
 
 <script>
-import numberWithCommas from '@/helpers/numbers';
-import getTextWithDefault from '@/helpers/text';
+import { getCountryFeature } from '@/composables/getCountryFeature';
+import capitalize from 'lodash.capitalize';
 
 export default {
   name: 'CountryCard',
@@ -24,27 +24,19 @@ export default {
     region: String,
     capital: String,
   },
-  computed: {
-    details() {
-      return [
-        {
-          name: 'Area',
-          data: `${numberWithCommas(this.area)} km²`,
-        }, {
-          name: 'Region',
-          data: this.region,
-        }, {
-          name: 'Capital',
-          data: this.capital,
-        },
-      ];
-    },
-  },
-  methods: {
-    getDetailText(detail) {
-      const text = detail.data;
-      return getTextWithDefault(text);
-    },
+  setup(props) {
+    const featureNames = ['area', 'region', 'capital'];
+    const features = featureNames.map((name) => (
+      getCountryFeature({
+        country: props,
+        label: capitalize(name),
+        path: name,
+      })
+    ));
+
+    return {
+      features,
+    };
   },
 };
 </script>

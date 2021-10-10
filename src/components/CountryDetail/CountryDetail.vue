@@ -21,12 +21,12 @@
         <div class="country-detail__features-wrap">
           <ul class="country-detail__features">
             <li
-              v-for="feature in $options.$static.features"
-              :key="feature.key"
+              v-for="feature in features"
+              :key="feature.label"
               class="country-detail__feature"
             >
               <span class="fw-600">{{ feature.label }}: </span>
-              <span>{{ getNormalizedFeatureText(feature) }}</span>
+              <span>{{ feature.text }}</span>
             </li>
           </ul>
         </div>
@@ -46,7 +46,8 @@
 <script>
 import { ArrowLeftIcon, LocationMarkerIcon } from '@heroicons/vue/solid';
 import Button from '@/components/Button/Button.vue';
-import getTextWithDefault from '@/helpers/text';
+import { countryFormatters } from '@/helpers/countryFormatters';
+import { getCountryFeature } from '@/composables/getCountryFeature';
 
 export default {
   name: 'CountryDetail',
@@ -72,36 +73,32 @@ export default {
     mapLink: String,
   },
   emits: ['back'],
-  $static: {
-    features: [
-      { label: 'Native Name', key: 'nativeName' },
-      { label: 'Area', key: 'area', formatter: (text) => `${text} km²` },
-      { label: 'Population', key: 'population' },
-      { label: 'Region', key: 'region' },
-      { label: 'Sub Region', key: 'subregion' },
-      { label: 'Capital', key: 'capital' },
-      { label: 'Top Level Domain', key: 'tld' },
-      { label: 'Currencies', key: 'currencies', itemKey: 'name' },
-      { label: 'Languages', key: 'languages' },
-    ],
-  },
-  methods: {
-    getFeatureText(feature) {
-      const { key, itemKey } = feature;
-      const featureProp = this[key];
-      if (!Array.isArray(featureProp)) {
-        return featureProp;
-      }
-      if (itemKey) {
-        return featureProp.map((item) => item[itemKey]).join(', ');
-      }
-      return featureProp.join(', ');
-    },
-    getNormalizedFeatureText(feature) {
-      const text = this.getFeatureText(feature);
-      const formattedText = feature.formatter ? feature.formatter(text) : text;
-      return getTextWithDefault(formattedText);
-    },
+  setup(props) {
+    const featureModels = [
+      { label: 'Native Name', path: 'nativeName' },
+      { label: 'Area', path: 'area', formatter: countryFormatters.area },
+      { label: 'Population', path: 'population' },
+      { label: 'Region', path: 'region' },
+      { label: 'Sub Region', path: 'subregion' },
+      { label: 'Capital', path: 'capital' },
+      { label: 'Top Level Domain', path: 'tld' },
+      {
+        label: 'Currencies',
+        path: 'currencies',
+        formatter: (currencies) => (currencies.map(({ name }) => name).join(', ')),
+      },
+      {
+        label: 'Languages',
+        path: 'languages',
+        formatter: countryFormatters.arrayOfStrings,
+      },
+    ];
+    const features = featureModels.map((model) => getCountryFeature({
+      country: props,
+      ...model,
+    }));
+
+    return { features };
   },
 };
 </script>

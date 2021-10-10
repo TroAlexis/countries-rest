@@ -1,8 +1,8 @@
-export default function getTextWithDefault(text, defaultText = '-') {
-  if (text === 0) {
-    return text;
-  } if (text) {
-    return text;
-  }
-  return defaultText;
+export function getTextWithDefault(text, defaultText = '-') {
+  console.log('Text: ', text);
+  return isTextValid(text) ? text : defaultText;
+}
+
+export function isTextValid(text) {
+  return Boolean(text) || text === 0;
 }
