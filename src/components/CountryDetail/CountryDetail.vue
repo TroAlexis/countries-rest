@@ -47,7 +47,7 @@
 import { ArrowLeftIcon, LocationMarkerIcon } from '@heroicons/vue/solid';
 import Button from '@/components/Button/Button.vue';
 import { countryFormatters } from '@/helpers/countryFormatters';
-import { getCountryFeature } from '@/composables/getCountryFeature';
+import { getCountryFeature } from '@/helpers/getCountryFeature';
 
 export default {
   name: 'CountryDetail',

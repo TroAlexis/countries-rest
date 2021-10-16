@@ -37,7 +37,6 @@ export default {
     };
 
     const { filterValue } = useCountriesFilterValue(filter, filterBy.value);
-    console.log(filterValue);
 
     watch(filterValue, (value) => {
       emit('select', value);

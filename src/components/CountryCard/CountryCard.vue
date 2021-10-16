@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { getCountryFeature } from '@/composables/getCountryFeature';
+import { getCountryFeature } from '@/helpers/getCountryFeature';
 import capitalize from 'lodash.capitalize';
 
 export default {
