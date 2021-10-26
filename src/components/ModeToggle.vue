@@ -13,7 +13,7 @@
 import BaseButton from '@/components/Base/BaseButton.vue';
 import { MoonIcon } from '@heroicons/vue/solid';
 
-import { mapActions, mapState } from 'vuex';
+import useDarkMode from '@/composables/useDarkMode';
 
 export default {
   name: 'ModeToggle',
@@ -21,13 +21,13 @@ export default {
     BaseButton,
     MoonIcon,
   },
-  computed: {
-    ...mapState(['darkMode']),
-  },
-  methods: {
-    ...mapActions([
-      'toggleDarkMode',
-    ]),
+  setup() {
+    const { darkMode, toggleDarkMode } = useDarkMode();
+
+    return {
+      darkMode,
+      toggleDarkMode,
+    };
   },
 };
 </script>
