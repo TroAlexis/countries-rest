@@ -40,11 +40,9 @@
 import checkOverflow from '@/helpers/document';
 import throttle from 'lodash.throttle';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid';
-
-async function setOverflowState() {
-  await this.$nextTick();
-  this.isOverflowing = checkOverflow(this.$refs.wrapper, 'x');
-}
+import {
+  ref, onMounted, watch, nextTick, onBeforeUnmount, toRefs, reactive,
+} from 'vue';
 
 export default {
   name: 'Pagination',
@@ -56,30 +54,32 @@ export default {
     pages: Number,
     currentPage: Number,
   },
-  data() {
-    return {
-      isOverflowing: false,
-    };
-  },
-  watch: {
-    pages: {
-      handler: 'updateOverflowState',
-    },
-  },
-  mounted() {
-    this.setUpOverflowListener();
-    this.updateOverflowState();
-  },
-  methods: {
-    setUpOverflowListener() {
-      window.addEventListener('resize', this.updateOverflowState);
-    },
-    removeOverflowListener() {
-      window.removeEventListener('resize', this.updateOverflowState);
-    },
-    updateOverflowState: throttle(setOverflowState, 1000),
-    handleScrollClick(direction) {
-      const $scrollBox = this.$refs.scrollBox;
+  setup(props) {
+    const isOverflowing = ref(false);
+    const refs = reactive({
+      wrapper: null,
+      scrollBox: null,
+    });
+    const { wrapper, scrollBox } = toRefs(refs);
+
+    async function setOverflowState() {
+      await nextTick();
+      isOverflowing.value = checkOverflow(wrapper.value, 'x');
+    }
+    const updateOverflowState = throttle(setOverflowState, 1000);
+
+    watch(() => props.pages, updateOverflowState);
+
+    onMounted(() => {
+      window.addEventListener('resize', updateOverflowState);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', updateOverflowState);
+    });
+
+    const handleScrollClick = (direction) => {
+      const $scrollBox = scrollBox.value;
       const $page = $scrollBox.querySelector('.pagination__page');
       const pageWidth = $page.scrollWidth * 3.5;
       const scrollAmount = direction === 'left' ? -pageWidth : pageWidth;
@@ -89,10 +89,14 @@ export default {
         behavior: 'smooth',
         left: scrollLeft,
       });
-    },
-  },
-  beforeUnmount() {
-    this.removeOverflowListener();
+    };
+
+    return {
+      isOverflowing,
+      handleScrollClick,
+      scrollBox,
+      wrapper,
+    };
   },
 };
 </script>
