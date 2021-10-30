@@ -2,8 +2,8 @@
   <main class="home">
     <Wrapper class="home__wrapper">
       <form @submit.prevent="" class="controls">
-        <SearchBar class="controls__search" @input="onInput"/>
-        <RegionSelect @select="onSelect" class="controls__select" />
+        <SearchBar class="controls__search" @input="resetCurrentPage"/>
+        <RegionSelect @select="resetCurrentPage" class="controls__select" />
       </form>
       <CountriesList v-model:current-page="currentPage" />
     </Wrapper>
@@ -15,6 +15,7 @@ import Wrapper from '@/components/Wrapper.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import RegionSelect from '@/components/RegionSelect.vue';
 import CountriesList from '@/components/CountriesList.vue';
+import { ref } from 'vue';
 
 export default {
   name: 'Home',
@@ -24,21 +25,19 @@ export default {
     SearchBar,
     Wrapper,
   },
-  data() {
-    return {
-      currentPage: 1,
+  setup() {
+    const currentPageBase = 1;
+    const currentPage = ref(currentPageBase);
+
+    const resetCurrentPage = () => {
+      currentPage.value = currentPageBase;
     };
-  },
-  methods: {
-    onSelect() {
-      this.resetCurrentPage();
-    },
-    onInput() {
-      this.resetCurrentPage();
-    },
-    resetCurrentPage() {
-      this.currentPage = 1;
-    },
+
+    return {
+      currentPage,
+      resetCurrentPage,
+
+    };
   },
 };
 </script>
