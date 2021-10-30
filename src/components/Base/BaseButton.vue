@@ -23,5 +23,6 @@ export default {
 .button-base {
   display: inline-flex;
   font-family: inherit;
+  cursor: pointer;
 }
 </style>
