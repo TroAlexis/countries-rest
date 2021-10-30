@@ -5,7 +5,7 @@
       tag="label" tabindex="0"
       @click="toggle"
       @keyup.enter="toggle"
-      v-click-outside="hide"
+      v-click-outside="disable"
     >
       <span :class="['select-base__placeholder', selected && 'select-base__placeholder--selected']">
         <slot name="placeholder">
@@ -22,7 +22,7 @@
       <BaseSelectOptions
         class="select-base__options"
          :options="options"
-        v-show="open"
+        v-show="active"
         @option-selected="onOptionSelected($event)"
       />
     </transition>
@@ -35,6 +35,7 @@ import BaseInputBox from '@/components/Base/BaseInputBox/BaseInputBox.vue';
 import { ChevronDownIcon } from '@heroicons/vue/solid/';
 import BaseSelectOptions from '@/components/Base/BaseSelect/BaseSelectOptions.vue';
 import ClickOutside from 'vue-click-outside';
+import useActive from '@/composables/useActive';
 
 export default {
   name: 'BaseSelect',
@@ -56,26 +57,21 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      open: false,
-    };
-  },
-  methods: {
-    toggle() {
-      this.open = !this.open;
-    },
-    hide() {
-      this.open = false;
-    },
-    onOptionSelected(payload) {
-      this.hide();
+  setup(props, { emit }) {
+    const { active, toggle, disable } = useActive();
 
-      this.$emit('update:selected', payload);
-    },
-  },
-  mounted() {
-    this.popupItem = this.$el;
+    function onOptionSelected(payload) {
+      disable();
+
+      emit('update:selected', payload);
+    }
+
+    return {
+      active,
+      toggle,
+      disable,
+      onOptionSelected,
+    };
   },
 };
 </script>
