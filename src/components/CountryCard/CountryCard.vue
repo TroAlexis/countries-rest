@@ -14,6 +14,7 @@
 <script>
 import { getCountryFeature } from '@/helpers/getCountryFeature';
 import capitalize from 'lodash.capitalize';
+import formatters from '@/helpers/countryFormatters';
 
 export default {
   name: 'CountryCard',
@@ -31,6 +32,7 @@ export default {
         country: props,
         label: capitalize(name),
         path: name,
+        formatter: formatters[name],
       })
     ));
 
