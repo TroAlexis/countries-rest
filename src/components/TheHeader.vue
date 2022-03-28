@@ -45,7 +45,7 @@ $icon-transition-time: 0.3s;
     font-size: scut-rem(24);
 
     a {
-      color: inherit;
+      color: var(--text-color-main);
       text-decoration: none;
 
       &:focus,
