@@ -31,7 +31,6 @@ jobs:
           ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
 
       - run: npm ci
-      - run: npm run test:unit
       - name: Build for production
         env:
           NODE_ENV: "production"
